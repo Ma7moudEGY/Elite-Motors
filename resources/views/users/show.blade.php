@@ -40,7 +40,9 @@
 					<i class="fas fa-car fa-3x text-warning mb-3"></i>
 					<h4 class="text-white">You Have Not Added Any Cars</h4>
 					<p class="text-secondary mb-4">Add your first car to see it here.</p>
-					<a href="{{ route('cars.create') }}" class="btn btn-warning text-black fw-semibold">Add a Car</a>
+					@if (Auth::user()->isAdmin())
+						<a href="{{ route('cars.create') }}" class="btn btn-warning text-black fw-semibold">Add a Car</a>
+					@endif
 				</div>
 			</div>
 		@endforelse

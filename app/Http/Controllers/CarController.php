@@ -22,15 +22,19 @@ class CarController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-{
-    return view('cars.create');
-}
+    {
+        Gate::authorize('create-car');
+
+        return view('cars.create');
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+    Gate::authorize('create-car');
+
     $request->validate([
         'make' => 'required|string|max:255',
         'model' => 'required|string|max:255',

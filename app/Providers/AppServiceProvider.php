@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::define('create-car', function (User $user): bool {
+            return $user->isAdmin();
+        });
+
         Gate::define('update-car', function (User $user, Car $car): bool {
             return $user->id === $car->user_id;
         });

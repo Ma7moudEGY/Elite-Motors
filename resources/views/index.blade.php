@@ -32,7 +32,9 @@
 		<div class="d-flex flex-wrap justify-content-center gap-3">
 			<a href="{{ route('cars.index') }}" class="btn btn-warning text-black fw-bold px-5 py-3 rounded-pill shadow-lg">Explore Showroom</a>
 			@auth
-				<a href="{{ route('cars.create') }}" class="btn btn-outline-warning fw-bold px-4 py-3 rounded-pill">Add New Car</a>
+				@if (Auth::user()->isAdmin())
+					<a href="{{ route('cars.create') }}" class="btn btn-outline-warning fw-bold px-4 py-3 rounded-pill">Add New Car</a>
+				@endif
 			@else
 				<a href="{{ route('register') }}" class="btn btn-outline-warning fw-bold px-4 py-3 rounded-pill">Join Elite Motors</a>
 			@endauth

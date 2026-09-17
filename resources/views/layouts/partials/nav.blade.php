@@ -149,8 +149,10 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-start">
                             <li><a class="dropdown-item" href="{{ route('cars.index') }}">View All Cars</a></li>
-                            <li><a class="dropdown-item" href="{{ route('cars.create') }}">Add a Car</a></li>
-                            <li><a class="dropdown-item" href="{{ route('users.show', Auth::id()) }}">My Added Cars</a></li>
+                            @if (Auth::user()->isAdmin())
+                                <li><a class="dropdown-item" href="{{ route('cars.create') }}">Add a Car</a></li>
+                                <li><a class="dropdown-item" href="{{ route('users.show', Auth::id()) }}">My Added Cars</a></li>
+                            @endif
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
