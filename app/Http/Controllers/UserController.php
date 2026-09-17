@@ -12,6 +12,7 @@ class UserController extends Controller {
 
         return view('users.index', compact('user'));
     }
+
     /**
      * Display the specified resource.
      */
@@ -39,7 +40,7 @@ class UserController extends Controller {
     public function update(Request $request, User $user) {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
         ]);
 
         $user->update($request->only('name', 'email'));

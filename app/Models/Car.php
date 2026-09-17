@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
-{
+class Car extends Model {
     use HasFactory;
+
     protected $fillable = [
         'make',
         'model',
@@ -21,8 +21,7 @@ class Car extends Model
         'user_id',
     ];
 
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'year' => 'integer',
             'is_rented' => 'boolean',
@@ -30,13 +29,11 @@ class Car extends Model
         ];
     }
 
-    public function owner(): BelongsTo
-    {
+    public function owner(): BelongsTo {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function rentings(): HasMany
-    {
+    public function rentings(): HasMany {
         return $this->hasMany(Renting::class);
     }
 }

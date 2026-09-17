@@ -2,11 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Renting extends Model
-{
+class Renting extends Model {
     protected $fillable = [
         'user_id',
         'car_id',
@@ -15,8 +14,7 @@ class Renting extends Model
         'price',
     ];
 
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'start_date' => 'date',
             'end_date' => 'date',
@@ -24,19 +22,17 @@ class Renting extends Model
         ];
     }
 
-    public function user(): BelongsTo
-    {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 
-    public function car(): BelongsTo
-    {
+    public function car(): BelongsTo {
         return $this->belongsTo(Car::class);
     }
 
-    public function calculateTotalPrice()
-    {
+    public function calculateTotalPrice() {
         $days = $this->end_date->diffInDays($this->start_date);
+
         return $days * $this->car->rental_price;
     }
 }

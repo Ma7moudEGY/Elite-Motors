@@ -8,15 +8,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<Car>
  */
-class CarFactory extends Factory
-{
+class CarFactory extends Factory {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
+    public function definition(): array {
         return [
             'make' => $this->faker->company(),
             'model' => $this->faker->word(),
@@ -25,7 +23,7 @@ class CarFactory extends Factory
             'image' => $this->faker->imageUrl(640, 480, 'transport', true),
             'is_rented' => false,
             'rental_price' => $this->faker->randomFloat(2, 50, 500),
-            'user_id' => 1
+            'user_id' => 1,
         ];
     }
 }

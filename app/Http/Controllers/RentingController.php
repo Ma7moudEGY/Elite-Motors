@@ -8,13 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
-class RentingController extends Controller
-{
+class RentingController extends Controller {
     /**
      * Display a listing of the cars the current user has rented.
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $rentings = $request->user()
             ->rentings()
             ->with('car')
@@ -27,8 +25,7 @@ class RentingController extends Controller
     /**
      * Show all cars so the user can rent one that is available.
      */
-    public function create()
-    {
+    public function create() {
         $cars = Car::where('user_id', '!=', request()->user()->id)
             ->orWhereNull('user_id')
             ->orderBy('make')
@@ -41,8 +38,7 @@ class RentingController extends Controller
     /**
      * Store a newly created resource in storage (rent a car).
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $validated = $request->validate([
             'car_id' => ['required', 'exists:cars,id'],
             'start_date' => ['required', 'date', 'after_or_equal:today'],
@@ -90,8 +86,7 @@ class RentingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Renting $renting)
-    {
+    public function show(Renting $renting) {
         Gate::authorize('view-renting', $renting);
 
         $renting->load('car');
@@ -102,8 +97,7 @@ class RentingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Renting $renting)
-    {
+    public function edit(Renting $renting) {
         Gate::authorize('update-renting', $renting);
 
         $renting->load('car');
@@ -114,8 +108,7 @@ class RentingController extends Controller
     /**
      * Update the specified resource in storage (change the rental dates).
      */
-    public function update(Request $request, Renting $renting)
-    {
+    public function update(Request $request, Renting $renting) {
         Gate::authorize('update-renting', $renting);
 
         $validated = $request->validate([
@@ -132,9 +125,7 @@ class RentingController extends Controller
             ->with('status', 'Renting updated successfully.');
     }
 
-
-    public function destroy(Renting $renting)
-    {
+    public function destroy(Renting $renting) {
         Gate::authorize('cancel-renting', $renting);
 
         $renting->car()->update(['is_rented' => false]);
