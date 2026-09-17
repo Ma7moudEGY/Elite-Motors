@@ -25,12 +25,9 @@ class RentingController extends Controller {
     /**
      * Show all cars so the user can rent one that is available.
      */
-    public function create() {
-        $cars = Car::where('user_id', '!=', request()->user()->id)
-            ->orWhereNull('user_id')
-            ->orderBy('make')
-            ->orderBy('model')
-            ->get();
+    public function create(Request $request) {
+        $carId = $request->filled('car_id') ? $request->integer('car_id') : null;
+        $cars = Car::availableFor($request->user(), $carId);
 
         return view('rentings.create', compact('cars'));
     }
