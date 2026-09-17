@@ -15,7 +15,7 @@ Route::view('/about', 'about')->name('about');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('cars', CarController::class)->middleware('auth');
 Route::resource('rentings', RentingController::class)->middleware('auth');
