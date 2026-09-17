@@ -80,13 +80,6 @@
                             </div>
                         </div>
 
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" name="is_rented" value="1" id="is_rented">
-                            <label class="form-check-label" for="is_rented">
-                                Car is rented
-                            </label>
-                        </div>
-
                         <button type="submit" class="btn btn-primary">
                             Add Car
                         </button>

@@ -53,7 +53,6 @@ class CarController extends Controller {
             'year' => $request->year,
             'color' => $request->color,
             'image' => $imageName,
-            'is_rented' => $request->has('is_rented'),
             'rental_price' => $request->rental_price,
             'user_id' => auth()->id(),
         ]);
